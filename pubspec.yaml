@@ -1,6 +1,6 @@
 name: syncfusion_flutter_charts
 description: A Flutter Charts library which includes data visualization widgets such as cartesian and circular charts, to create real-time, interactive, high-performance, animated charts.
-version: 23.1.37
+version: 23.1.38
 homepage: https://github.com/syncfusion/flutter-widgets/tree/master/packages/syncfusion_flutter_charts
 
 environment:
@@ -11,6 +11,6 @@ dependencies:
     sdk: flutter
   intl: ^0.19.0
   vector_math: ">=2.1.0 <=3.0.0"
-  syncfusion_flutter_core: ^23.1.36
+  syncfusion_flutter_core: ^28.1.38
 
 flutter:
