@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=/Users/sepranashari/fvm/versions/3.19.0"
-export "FLUTTER_APPLICATION_PATH=/Users/sepranashari/Documents/Projects/sepran-app/plugins/syncfusion_flutter_charts-23.1.36/example"
+export "FLUTTER_ROOT=/Users/sepranashari/fvm/versions/3.27.1"
+export "FLUTTER_APPLICATION_PATH=/Users/sepranashari/Documents/Projects/sepran-app/packages/syncfusion_flutter_charts/example"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_BUILD_DIR=build"
 export "FLUTTER_BUILD_NAME=1.0.0"

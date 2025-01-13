@@ -3,6 +3,7 @@ import 'package:syncfusion_flutter_core/theme.dart';
 import '../marker.dart';
 import '../plot_band.dart';
 import '../renderers/spark_line_renderer.dart';
+import '../theme.dart';
 import '../trackball/spark_chart_trackball.dart';
 import '../trackball/trackball_renderer.dart';
 import '../utils/enum.dart';
@@ -43,10 +44,10 @@ class SfSparkLineChart extends StatefulWidget {
       this.plotBand,
       this.width = 2,
       this.dashArray,
-      this.color = Colors.blue,
+      this.color,
       this.isInversed = false,
       this.axisCrossesAt = 0,
-      this.axisLineColor = Colors.black,
+      this.axisLineColor,
       this.axisLineWidth = 2,
       this.axisLineDashArray,
       this.highPointColor,
@@ -127,10 +128,10 @@ class SfSparkLineChart extends StatefulWidget {
       this.plotBand,
       this.width = 2,
       this.dashArray,
-      this.color = Colors.blue,
+      this.color,
       this.isInversed = false,
       this.axisCrossesAt = 0,
-      this.axisLineColor = Colors.black,
+      this.axisLineColor,
       this.axisLineWidth = 2,
       this.axisLineDashArray,
       this.highPointColor,
@@ -214,7 +215,7 @@ class SfSparkLineChart extends StatefulWidget {
   /// Customizes the color of the axis line.
   /// Colors.transparent can be set to [axisLineColor] to hide the axis line.
   ///
-  /// Defaults to `Colors.black`.
+  /// Defaults to null.
   ///
   /// ```dart
   /// @override
@@ -229,7 +230,7 @@ class SfSparkLineChart extends StatefulWidget {
   ///   );
   /// }
   /// ```
-  final Color axisLineColor;
+  final Color? axisLineColor;
 
   /// Dashes of the axis line. Any number of values can be provided on the list.
   /// Odd value is considered as rendering size and even value is considered a gap.
@@ -364,7 +365,7 @@ class SfSparkLineChart extends StatefulWidget {
 
   /// Customizes the spark line chart color.
   ///
-  /// Defaults to `Colors.blue`.
+  /// Defaults to null.
   ///
   /// ```dart
   /// @override
@@ -378,7 +379,7 @@ class SfSparkLineChart extends StatefulWidget {
   ///  );
   /// }
   /// ```
-  final Color color;
+  final Color? color;
 
   /// Render plot band.
   ///
@@ -534,8 +535,7 @@ class SfSparkLineChart extends StatefulWidget {
   ///
   /// Using the [TextStyle], add style data labels.
   ///
-  /// Defaults to the [TextStyle] property with font size `12.0` and font family
-  ///  `Roboto`.
+  /// Defaults to null.
   ///
   /// Also refer [TextStyle].
   ///
@@ -565,13 +565,50 @@ class SfSparkLineChart extends StatefulWidget {
 /// Represents the state class for spark line chart widget.
 class _SfSparkLineChartState extends State<SfSparkLineChart> {
   /// Specifies the theme of the chart.
-  late SfChartThemeData _chartThemeData;
+  late SfSparkChartThemeData _chartThemeData;
 
   /// Specifies the series screen coordinate points.
   late List<Offset> _coordinatePoints;
 
   /// Specifies the series data points.
   late List<SparkChartPoint> _dataPoints;
+
+  SfSparkChartThemeData _updateThemeData(BuildContext context) {
+    SfSparkChartThemeData chartThemeData = SfSparkChartTheme.of(context);
+    final ThemeData theme = Theme.of(context);
+    final SfSparkChartThemeData effectiveChartThemeData =
+        SparkChartThemeData(context);
+    chartThemeData = chartThemeData.copyWith(
+        color: widget.color ??
+            chartThemeData.color ??
+            effectiveChartThemeData.color,
+        axisLineColor: widget.axisLineColor ??
+            chartThemeData.axisLineColor ??
+            effectiveChartThemeData.axisLineColor,
+        markerFillColor: chartThemeData.markerFillColor ??
+            effectiveChartThemeData.markerFillColor,
+        dataLabelBackgroundColor: chartThemeData.dataLabelBackgroundColor ??
+            effectiveChartThemeData.dataLabelBackgroundColor,
+        tooltipColor:
+            chartThemeData.tooltipColor ?? effectiveChartThemeData.tooltipColor,
+        trackballLineColor: chartThemeData.trackballLineColor ??
+            effectiveChartThemeData.trackballLineColor,
+        tooltipLabelColor: chartThemeData.tooltipLabelColor ??
+            effectiveChartThemeData.tooltipLabelColor,
+        dataLabelTextStyle: theme.textTheme.bodySmall!
+            .copyWith(color: Colors.transparent)
+            .merge(chartThemeData.dataLabelTextStyle)
+            .merge(widget.labelStyle),
+        trackballTextStyle: theme.textTheme.bodySmall
+            ?.copyWith(
+              color: widget.trackball?.color ??
+                  chartThemeData.tooltipLabelColor ??
+                  effectiveChartThemeData.tooltipLabelColor,
+            )
+            .merge(chartThemeData.trackballTextStyle)
+            .merge(widget.trackball?.labelStyle));
+    return chartThemeData;
+  }
 
   /// Called when this object is inserted into the tree.
   ///
@@ -598,18 +635,7 @@ class _SfSparkLineChartState extends State<SfSparkLineChart> {
 
   @override
   void didChangeDependencies() {
-    _chartThemeData =
-        _updateThemeData(context, Theme.of(context), SfChartTheme.of(context));
     super.didChangeDependencies();
-  }
-
-  SfChartThemeData _updateThemeData(BuildContext context, ThemeData themeData,
-      SfChartThemeData chartThemeData) {
-    chartThemeData = chartThemeData.copyWith(
-        dataLabelTextStyle: themeData.textTheme.bodySmall!
-            .merge(chartThemeData.dataLabelTextStyle)
-            .merge(widget.labelStyle));
-    return chartThemeData;
   }
 
   /// Called whenever the widget configuration changes.
@@ -625,8 +651,6 @@ class _SfSparkLineChartState extends State<SfSparkLineChart> {
 
   @override
   void didUpdateWidget(SfSparkLineChart oldWidget) {
-    _chartThemeData =
-        _updateThemeData(context, Theme.of(context), SfChartTheme.of(context));
     super.didUpdateWidget(oldWidget);
   }
 
@@ -654,6 +678,7 @@ class _SfSparkLineChartState extends State<SfSparkLineChart> {
 
   /// Method to return the spark line chart widget.
   Widget _getSparkLineChart() {
+    _chartThemeData = _updateThemeData(context);
     return SparkChartContainer(
         child: Stack(children: <Widget>[
       SfSparkLineChartRenderObjectWidget(
@@ -665,7 +690,7 @@ class _SfSparkLineChartState extends State<SfSparkLineChart> {
           dashArray: widget.dashArray,
           isInversed: widget.isInversed,
           axisCrossesAt: widget.axisCrossesAt,
-          axisLineColor: widget.axisLineColor,
+          axisLineColor: _chartThemeData.axisLineColor,
           axisLineWidth: widget.axisLineWidth,
           axisLineDashArray: widget.axisLineDashArray,
           highPointColor: widget.highPointColor,
@@ -673,11 +698,11 @@ class _SfSparkLineChartState extends State<SfSparkLineChart> {
           firstPointColor: widget.firstPointColor,
           lastPointColor: widget.lastPointColor,
           negativePointColor: widget.negativePointColor,
-          color: widget.color,
+          color: _chartThemeData.color,
           plotBand: widget.plotBand,
           marker: widget.marker,
           labelDisplayMode: widget.labelDisplayMode,
-          labelStyle: widget.labelStyle,
+          labelStyle: _chartThemeData.dataLabelTextStyle,
           themeData: _chartThemeData,
           sparkChartDataDetails: widget._sparkChartDataDetails,
           dataPoints: _dataPoints,
@@ -686,6 +711,7 @@ class _SfSparkLineChartState extends State<SfSparkLineChart> {
         trackball: widget.trackball,
         coordinatePoints: _coordinatePoints,
         dataPoints: _dataPoints,
+        themeData: _chartThemeData,
       )
     ]));
   }

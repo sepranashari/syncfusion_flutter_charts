@@ -137,8 +137,7 @@ class SparkChartTrackball {
   ///
   /// Using the [TextStyle], add style data labels.
   ///
-  /// Defaults to the [TextStyle] property with font size `12.0` and
-  /// font family `Roboto`.
+  /// Defaults to null.
   ///
   ///  Also refer [TextStyle].
   ///
@@ -335,19 +334,19 @@ class SparkChartTrackball {
 
   @override
   int get hashCode {
-    final List<Object?> values = <Object?>[
+    final List<Object> values = <Object>[
       width,
-      color,
+      color!,
       activationMode,
-      labelStyle,
-      backgroundColor,
-      borderColor,
+      labelStyle!,
+      backgroundColor!,
+      borderColor!,
       borderWidth,
-      dashArray,
+      dashArray!,
       shouldAlwaysShow,
       hideDelay,
       borderRadius,
-      tooltipFormatter
+      tooltipFormatter!
     ];
     return Object.hashAll(values);
   }

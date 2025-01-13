@@ -3,6 +3,7 @@ import 'package:syncfusion_flutter_core/theme.dart';
 import '../marker.dart';
 import '../plot_band.dart';
 import '../renderers/spark_area_renderer.dart';
+import '../theme.dart';
 import '../trackball/spark_chart_trackball.dart';
 import '../trackball/trackball_renderer.dart';
 import '../utils/enum.dart';
@@ -44,10 +45,10 @@ class SfSparkAreaChart extends StatefulWidget {
       this.plotBand,
       this.borderWidth = 0,
       this.borderColor,
-      this.color = Colors.blue,
+      this.color,
       this.isInversed = false,
       this.axisCrossesAt = 0,
-      this.axisLineColor = Colors.black,
+      this.axisLineColor,
       this.axisLineWidth = 2,
       this.axisLineDashArray,
       this.highPointColor,
@@ -59,7 +60,7 @@ class SfSparkAreaChart extends StatefulWidget {
       this.labelDisplayMode,
       this.labelStyle,
       this.trackball})
-      : _sparkChartDataDetails = SparkChartDataDetails(data: data!),
+      : _sparkChartDataDetails = SparkChartDataDetails(data: data),
         super(key: key);
 
   /// Creates the spark area chart for the provided set of data with its default view.
@@ -123,15 +124,15 @@ class SfSparkAreaChart extends StatefulWidget {
       /// Specifies the x-value mapping field.
       SparkChartIndexedValueMapper<dynamic>? xValueMapper,
 
-      /// Specifies the y-value maping field.
+      /// Specifies the y-value mapping field.
       SparkChartIndexedValueMapper<num>? yValueMapper,
       this.plotBand,
       this.borderWidth = 2,
       this.borderColor,
-      this.color = Colors.blue,
+      this.color,
       this.isInversed = false,
       this.axisCrossesAt = 0,
-      this.axisLineColor = Colors.black,
+      this.axisLineColor,
       this.axisLineWidth = 2,
       this.axisLineDashArray,
       this.highPointColor,
@@ -144,9 +145,9 @@ class SfSparkAreaChart extends StatefulWidget {
       this.labelStyle,
       this.trackball})
       : _sparkChartDataDetails = SparkChartDataDetails(
-            dataCount: dataCount!,
-            xValueMapper: xValueMapper!,
-            yValueMapper: yValueMapper!),
+            dataCount: dataCount,
+            xValueMapper: xValueMapper,
+            yValueMapper: yValueMapper),
         super(key: key);
 
   /// Inverts the axis from right to left.
@@ -214,7 +215,7 @@ class SfSparkAreaChart extends StatefulWidget {
   /// Customizes the color of the axis line.
   /// Colors.transparent can be set to [axisLineColor] to hide the axis line.
   ///
-  /// Defaults to `Colors.black`.
+  /// Defaults to null.
   ///
   /// ```dart
   /// @override
@@ -229,7 +230,7 @@ class SfSparkAreaChart extends StatefulWidget {
   ///   );
   /// }
   /// ```
-  final Color axisLineColor;
+  final Color? axisLineColor;
 
   /// Dashes of the axis line. Any number of values can be provided on the list.
   /// Odd value is considered as rendering size and even value is considered a gap.
@@ -364,7 +365,7 @@ class SfSparkAreaChart extends StatefulWidget {
 
   /// Customizes the spark area chart color.
   ///
-  /// Defaults to `Colors.blue`.
+  /// Defaults to null.
   ///
   /// ```dart
   /// @override
@@ -378,11 +379,11 @@ class SfSparkAreaChart extends StatefulWidget {
   ///  );
   /// }
   /// ```
-  final Color color;
+  final Color? color;
 
   /// Render plot band.
   ///
-  /// Plot band is also known as stripline, which is used to shade the different
+  /// Plot band is also known as strip-line, which is used to shade the different
   /// ranges in plot area with different colors to improve the readability
   /// of the chart.
   ///
@@ -494,7 +495,7 @@ class SfSparkAreaChart extends StatefulWidget {
   ///
   /// Also refer [SparkChartLabelDisplayMode].
   ///
-  /// Defaults to `SparkChartDislayMode.none`.
+  /// Defaults to `SparkChartDisplayMode.none`.
   ///
   /// ```dart
   /// @override
@@ -514,8 +515,7 @@ class SfSparkAreaChart extends StatefulWidget {
   ///
   /// Using the [TextStyle], add style data labels.
   ///
-  /// Defaults to the [TextStyle] property with font size `12.0` and font
-  /// family `Roboto`.
+  /// Defaults to null.
   ///
   /// Also refer [TextStyle].
   ///
@@ -571,13 +571,50 @@ class SfSparkAreaChart extends StatefulWidget {
 /// Represents the state class for spark area widget.
 class _SfSparkAreaChartState extends State<SfSparkAreaChart> {
   /// Specifies the theme of the chart.
-  late SfChartThemeData _chartThemeData;
+  late SfSparkChartThemeData _chartThemeData;
 
   /// Specifies the series screen coordinate points.
   late List<Offset> _coordinatePoints;
 
   /// Specifies the series data points.
   late List<SparkChartPoint> _dataPoints;
+
+  SfSparkChartThemeData _updateThemeData(BuildContext context) {
+    SfSparkChartThemeData chartThemeData = SfSparkChartTheme.of(context);
+    final ThemeData theme = Theme.of(context);
+    final SfSparkChartThemeData effectiveChartThemeData =
+        SparkChartThemeData(context);
+    chartThemeData = chartThemeData.copyWith(
+        color: widget.color ??
+            chartThemeData.color ??
+            effectiveChartThemeData.color,
+        axisLineColor: widget.axisLineColor ??
+            chartThemeData.axisLineColor ??
+            effectiveChartThemeData.axisLineColor,
+        markerFillColor: chartThemeData.markerFillColor ??
+            effectiveChartThemeData.markerFillColor,
+        dataLabelBackgroundColor: chartThemeData.dataLabelBackgroundColor ??
+            effectiveChartThemeData.dataLabelBackgroundColor,
+        tooltipColor:
+            chartThemeData.tooltipColor ?? effectiveChartThemeData.tooltipColor,
+        trackballLineColor: chartThemeData.trackballLineColor ??
+            effectiveChartThemeData.trackballLineColor,
+        tooltipLabelColor: chartThemeData.tooltipLabelColor ??
+            effectiveChartThemeData.tooltipLabelColor,
+        dataLabelTextStyle: theme.textTheme.bodySmall!
+            .copyWith(color: Colors.transparent)
+            .merge(chartThemeData.dataLabelTextStyle)
+            .merge(widget.labelStyle),
+        trackballTextStyle: theme.textTheme.bodySmall
+            ?.copyWith(
+              color: widget.trackball?.color ??
+                  chartThemeData.tooltipLabelColor ??
+                  effectiveChartThemeData.tooltipLabelColor,
+            )
+            .merge(chartThemeData.trackballTextStyle)
+            .merge(widget.trackball?.labelStyle));
+    return chartThemeData;
+  }
 
   /// Called when this object is inserted into the tree.
   ///
@@ -608,8 +645,6 @@ class _SfSparkAreaChartState extends State<SfSparkAreaChart> {
 
   @override
   void didUpdateWidget(SfSparkAreaChart oldWidget) {
-    _chartThemeData =
-        _updateThemeData(context, Theme.of(context), SfChartTheme.of(context));
     super.didUpdateWidget(oldWidget);
   }
 
@@ -622,18 +657,7 @@ class _SfSparkAreaChartState extends State<SfSparkAreaChart> {
 
   @override
   void didChangeDependencies() {
-    _chartThemeData =
-        _updateThemeData(context, Theme.of(context), SfChartTheme.of(context));
     super.didChangeDependencies();
-  }
-
-  SfChartThemeData _updateThemeData(BuildContext context, ThemeData themeData,
-      SfChartThemeData chartThemeData) {
-    chartThemeData = chartThemeData.copyWith(
-        dataLabelTextStyle: themeData.textTheme.bodySmall!
-            .merge(chartThemeData.dataLabelTextStyle)
-            .merge(widget.labelStyle));
-    return chartThemeData;
   }
 
   /// Describes the part of the user interface represented by this widget.
@@ -647,6 +671,7 @@ class _SfSparkAreaChartState extends State<SfSparkAreaChart> {
 
   @override
   Widget build(BuildContext context) {
+    _chartThemeData = _updateThemeData(context);
     if (widget.marker != null &&
         widget.marker!.displayMode != SparkChartMarkerDisplayMode.none) {
       final double padding = widget.marker!.size / 2;
@@ -669,7 +694,7 @@ class _SfSparkAreaChartState extends State<SfSparkAreaChart> {
           yValueMapper: widget._sparkChartDataDetails.yValueMapper,
           isInversed: widget.isInversed,
           axisCrossesAt: widget.axisCrossesAt,
-          axisLineColor: widget.axisLineColor,
+          axisLineColor: _chartThemeData.axisLineColor,
           axisLineWidth: widget.axisLineWidth,
           axisLineDashArray: widget.axisLineDashArray,
           highPointColor: widget.highPointColor,
@@ -677,13 +702,13 @@ class _SfSparkAreaChartState extends State<SfSparkAreaChart> {
           firstPointColor: widget.firstPointColor,
           lastPointColor: widget.lastPointColor,
           negativePointColor: widget.negativePointColor,
-          color: widget.color,
+          color: _chartThemeData.color,
           borderColor: widget.borderColor,
           borderWidth: widget.borderWidth,
           plotBand: widget.plotBand,
           marker: widget.marker,
           labelDisplayMode: widget.labelDisplayMode,
-          labelStyle: widget.labelStyle,
+          labelStyle: _chartThemeData.dataLabelTextStyle,
           themeData: _chartThemeData,
           sparkChartDataDetails: widget._sparkChartDataDetails,
           dataPoints: _dataPoints,
@@ -692,6 +717,7 @@ class _SfSparkAreaChartState extends State<SfSparkAreaChart> {
           trackball: widget.trackball,
           coordinatePoints: _coordinatePoints,
           dataPoints: _dataPoints,
+          themeData: _chartThemeData,
           sparkChart: widget)
     ]));
   }

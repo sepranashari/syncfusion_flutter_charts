@@ -1,6 +1,397 @@
-﻿## [23.1.36] - 09/15/2023
+## [28.1.36] - 24/12/2024
+
+**Bugs**
+
+* \#BD661538 - Resolved a failed assertion exception that occurred when using behaviors in the Chart and attempting to display the behavior before the chart finished loading.
+* \#BD665634 - The data label tooltip now updates properly when long text is used in the data label in [CircularCharts](https://pub.dev/documentation/syncfusion_flutter_charts/latest/charts/CircularSeries-class.html).
+* \#GH2208 - Resolved null exception when the [isVisibleLegend](https://pub.dev/documentation/syncfusion_flutter_charts/latest/charts/Trendline/isVisibleInLegend.html) is set to false for trendlines in [CartesianCharts](https://pub.dev/documentation/syncfusion_flutter_charts/latest/charts/SfCartesianChart-class.html).
+
+## [28.1.33] - 12/12/2024
+
+**General**
+
+* All of our Syncfusion<sup>&reg;</sup> Flutter widgets have been updated to support [`WebAssembly`](https://docs.flutter.dev/platform-integration/web/wasm) (WASM) as a compilation target for building web applications.
+* The minimum Dart version of our Flutter widgets has been updated to 3.3 from 2.17.
+
+### Features
+
+* \#FB58652 - Added support to enable and disable the trackball behavior for specific series in cartesian charts.
+
+## [27.2.3] - 21/11/2024
+
+**Bugs**
+
+* \#F194931 - Resolved [StackedAreaSeries](https://pub.dev/documentation/syncfusion_flutter_charts/latest/charts/StackedAreaSeries-class.html) is not rendering properly with negative data points when using multiple stacked series.
+
+## [27.1.54] - 22/10/2024
+
+**Bugs**
+
+* \#BD640641 - Resolved failed assertion exception when the data source had value as zero in [SparkBarChart](https://pub.dev/documentation/syncfusion_flutter_charts/latest/sparkcharts/SfSparkBarChart-class.html).
+* \#BD640555 - Now the [PlotBand](https://pub.dev/documentation/syncfusion_flutter_charts/latest/sparkcharts/SparkChartPlotBand-class.html) update properly for different start and end values.
+
+## [27.1.53] - 15/10/2024
+
+**Bugs**
+
+* \#GH2084 - Now the [onDataLabelTapped](https://pub.dev/documentation/syncfusion_flutter_charts/latest/charts/SfCartesianChart/onDataLabelTapped.html) callback invoke properly when tap inside data label bounds.
+* \#GH2091 - Resolved no element state exception when the data source had empty data in the [RadialBarSeries](https://pub.dev/documentation/syncfusion_flutter_charts/latest/charts/RadialBarSeries-class.html) with Legend.
+
+## [27.1.51] - 30/09/2024
+
+**Bugs**
+
+* \#BD626485 - Resolved the range error exception when adding data dynamically in the circular series with [legendItemBuilder](https://pub.dev/documentation/syncfusion_flutter_charts/latest/charts/Legend/legendItemBuilder.html).
+* \#BD624619 - The trackball builder's position now renders properly in the [groupAllPoints](https://pub.dev/documentation/syncfusion_flutter_charts/latest/charts/TrackballDisplayMode.html) display mode on transposed charts.
+* \#BD630726 - Resolved the range error exception when updating the data source with the [pointShaderMapper](https://pub.dev/documentation/syncfusion_flutter_charts/latest/charts/CircularSeries/pointShaderMapper.html) property in the circular series.
+
+## [27.1.48] - 18/09/2024
+
+**General**
+
+* \#GH2008, \#GH2013, \#GH2012, \#BD620212, \#BD620214, \#F192976, \#BD621964, \#BD621021, \#BD620826, \#BD619659, \#BD619610, \#BD620964, \#GH2020, \#F194113, \#GH623599, \#GH1907, \#BD626072, \#BD626410, \#GH2041, \#BD626867, \#GH2045 - The compatible version of our Flutter charts widget has been updated to Flutter SDK 3.24.0.
+
+### Features
+
+* \#FB31997 - Added support for `borderRadius` in the candle series.
+* Added support for customizing `width` and `spacing` of the candle series.
+* Added support for individual plot offset customization for the chart axis.
+* Added `additionalStart`, `additionalEnd`, `roundStart` and `roundEnd` enums to [`rangePadding`](https://pub.dev/documentation/syncfusion_flutter_charts/latest/charts/ChartAxis/rangePadding.html) property to customize the axis range padding at the start or end of the axis.
+
+**Bugs**
+
+* The [`RadialBarSeries`](https://pub.dev/documentation/syncfusion_flutter_charts/latest/charts/RadialBarSeries-class.html) animation now updates properly when data points are reset dynamically.
+* The range of the category axis now updates correctly when data points are dynamically replaced.
+* The tooltip position of the trackball builder has been adjusted to inside within the plot area.
+
+## [26.2.9] - 13/08/2024
+
+**Bugs**
+
+* Now, the trackball image marker is updated according to the marker visibility mode set to auto. 
+* Now, the [pointColorMapper](https://pub.dev/documentation/syncfusion_flutter_charts/latest/charts/ChartSeriesRenderer/pointColorMapper.html) colors are properly updated when the data source is dynamically changed with different lengths.
+
+## [26.1.35] - 11/06/2024
+
+### Features
+
+Added two new indicators in Cartesian Chart:
+
+* \#FB15987 - Provided Rate of Change Indicator (ROC) support to technical indicators.
+* \#FB15987 - Provided Weighted Moving Average Indicator (WMA) support to technical indicators.
+
+## [25.2.5] - 09/04/2024
+
+### Improvements:
+
+ZoomPanBehavior:
+
+Added below methods for pointer and gesture events, along with a paint method, to allow for customization of the zooming and panning.
+
+* handleEvent
+* handleDoubleTap
+* handleScaleStart
+* handleScaleUpdate
+* handleScaleEnd
+* handleLongPressStart
+* handleLongPressMoveUpdate
+* handleLongPressEnd
+* onPaint
+
+## [25.1.35] - 15/03/2024
+
+**General**
+
+* Provided th​e Material 3 themes support.
+
+### Features
+
+* Provided touch support for trackball builder.
+
+### Improvements:
+
+* Interaction performance has been improved by 2x for crosshair and trackball behavior.
+
+TrackballBehavior:
+
+* Improved the trackball label UI with the series name and y value instead of y value for XyDataSeries when setting the tooltip display mode as groupAllPoints. 
+
+* Added below methods for pointer and gesture events, along with a paint method, to allow for customization of the trackball.
+
+* handleEvent
+* handleLongPressStart
+* handleLongPressMoveUpdate
+* handleLongPressEnd
+* handleTapDown
+* handleTapUp
+* handleDoubleTap
+* handlePointerEnter
+* handlePointerExit
+* onPaint
+
+CrosshairBehavior:
+
+Added below methods for pointer and gesture events, along with a paint method, to allow for customization of the crosshair.
+
+* handleEvent
+* handleLongPressStart
+* handleLongPressMoveUpdate
+* handleLongPressEnd
+* handleTapDown
+* handleTapUp
+* handleDoubleTap
+* handlePointerEnter
+* handlePointerExit
+* onPaint
+* drawHorizontalAxisLine
+* drawVerticalAxisLine
+* drawHorizontalAxisTooltip
+* drawVerticalAxisTooltip
+
+### Bug Fixes
+
+* Provided legend toggling animation support for [ColumnSeries](https://pub.dev/documentation/syncfusion_flutter_charts/latest/charts/ColumnSeries-class.html) and [BarSeries](https://pub.dev/documentation/syncfusion_flutter_charts/latest/charts/BarSeries-class.html).
+* Provided newly added datapoint animation support for [LineSeries](https://pub.dev/documentation/syncfusion_flutter_charts/latest/charts/LineSeries-class.html)
+* Provided data label intersection support for multiple series.
+* \#FB50894 - Now, the stacked series is rendering properly while having multiple series with different x values.
+
+## [24.1.46] - 17/01/2024
+
+**General**
+
+* Upgraded the `intl` package to the latest version 0.19.0.
+
+## [24.1.41] - 12/18/2023
+
+### Features
+
+* Provided `onRendererCreated` callback support in the `ChartAxis`.
+* Provided clipping support for annotation feature. 
+* Provided custom segment rendering support for Circular, Funnel, and Pyramid charts.
+* Provided touch support for annotation content.
+
+## Improvements
+
+* Flutter charts rendering performance has been improved by 5x.
+* Flutter charts memory usage has been reduced by 8x. 
+* Multi-level labels curly braces UI has been improved in ChartAxis. 
+* The `labelAlignment` property positioning has been improved in ChartAxis. 
+* Marker fill color is rendered based on themes.
+
+### Bug Fixes
+
+* \#FB48648 - Now, the line series will render correctly while having continuous empty points with drop mode.
+
+### Breaking changes
+
+Following breaking changes will occur in Charts. 
+
+## CartesianChart:
+
+* The `series` property type has been changed to `List<CartesianSeries>` from `List<ChartSeries>`. 
+* The `TechnicalIndicators` property has been renamed to `TechnicalIndicator`. 
+
+## Axis:
+
+* The `visibleMinimum` property has been renamed to `initialVisibleMinimum`.
+* The `visibleMaximum` property has been renamed to `initialVisibleMaximum`.
+* The `zoomFactor` property has been renamed to `initialZoomFactor`.
+* The `zoomPosition` property has been renamed to `initialZoomPosition`.
+* The `minorTicksPerInterval` property is removed in both `CategoryAxis` and `DateTimeCategoryAxis`.
+* The axis line now renders along with axis labels when the `placeLabelNearAxisLine` property is set to true. 
+
+## Series:
+
+* The `isVisible` property has been renamed to `initialisVisible`.
+* The `drawDataMarker` method arguments have been changed to `drawDataMarker(int index, Canvas canvas, Paint fillPaint, Paint strokePaint, Offset point, Size size, DataMarkerType type, [CartesianSeriesRenderer<T, D>? seriesRenderer,])` in ChartSeries.
+* The `calculateEmptyPointValue` method is removed from ChartSeries. 
+* Data label intersection does not work with multiple series. 
+* `ErrorBarSeries` has been changed to a single segmented series from multiple segments.
+
+## Selection:
+
+* The `initialSelectedIndex` will now select a single segment when the `enableMultiSelection` value is `false`. 
+* During the point selection, the single segment is now highlighted instead of the entire series in line-type series. 
+
+## Legend: 
+
+* The legend for `FunnelSeries` is now rendered according to the data source order.
+
+## ChartPointInfo: 
+
+* The `seriesRendererDetails` and `seriesIndex` is removed in ChartPointInfo class.
+* The `series` property type has been changed to `dynamic` from `CartesianSeries`. 
+
+## CartesianChartPoint: 
+
+The following properties has been removed from the `CartesianChartPoint` class.
+
+* yValue 
+* sortValue 
+* markerPoint 
+* markerPoint2 
+* isEmpty 
+* isGap
+* isDrop
+* isVisible
+* pointColorMapper
+* dataLabelMapper
+* region
+* boxRectRegion
+* outlierRegion
+* outlierRegionPosition
+* isIntermediateSum
+* isTotalSum
+* endValue
+* originValue
+* maxYValue
+* labelRenderEvent
+* isTooltipRenderEvent
+* openPoint
+* closePoint
+* centerOpenPoint
+* centerClosePoint
+* lowPoint
+* highPoint
+* centerLowPoint
+* centerHighPoint
+* currentPoint
+* startControl
+* endControl
+* highStartControl
+* highEndControl
+* lowStartControl
+* lowEndControl
+* minimumPoint
+* maximumPoint
+* lowerQuartilePoint
+* upperQuartilePoint
+* centerMinimumPoint
+* centerMaximumPoint
+* medianPoint
+* centerMedianPoint
+* centerMeanPoint
+* originValueLeftPoint
+* originValueRightPoint
+* endValueLeftPoint
+* endValueRightPoint
+* horizontalPositiveErrorPoint
+* horizontalNegativeErrorPoint
+* verticalPositiveErrorPoint
+* verticalNegativeErrorPoint
+* errorBarValues
+* outliersPoint
+* controlPoint
+* controlPointshigh
+* controlPointslow
+* regions
+* cumulativeValue
+* trackerRectRegion
+* label
+* label2
+* label3
+* label4
+* label5
+* outliersLabel
+* labelFillRect
+* labelFillRect2
+* labelFillRect3
+* labelFillRect4
+* labelFillRect5
+* outliersFillRect
+* labelLocation
+* labelLocation2
+* labelLocation3
+* labelLocation4
+* labelLocation5
+* outliersLocation
+* dataLabelSaturationRegionInside
+* dataLabelRegion
+* dataLabelRegion2
+* dataLabelRegion3
+* dataLabelRegion4
+* dataLabelRegion5
+* outliersDataLabelRegion
+* index
+* overallDataPointIndex
+* regionData
+* visiblePointIndex
+
+## ChartPoint: 
+
+The following properties has been removed from the `ChartPoint` class. Instead of this, you can get the values of these properties from the corresponding segment class.
+
+* degree
+* startAngle
+* endAngle
+* midAngle
+* center
+* text
+* fill
+* strokeColor
+* sortValue
+* strokeWidth
+* innerRadius
+* outerRadius
+* isExplode
+* isShadow
+* isEmpty
+* isVisible
+* isSelected
+* dataLabelPosition
+* renderPosition
+* labelRect
+* dataLabelSize
+* saturationRegionOutside
+* yRatio
+* heightRatio
+* radius
+* pointColor
+* trimmedText
+* overflowTrimmedText
+* isTooltipRenderEvent
+* labelRenderEvent
+* index
+* shader 
+
+## Behavior changes
+
+* Now, the axis line and labels are rendered above the series while using `crossesAt` feature in ChartAxis. 
+* The plot band `opacity` property is now applied to fill, stroke and text color. 
+* The series `opacity` property is now applied to the both series fill and stroke color. 
+* The tooltip `opacity` property is now applied to the fill, stroke, text and marker color.
+
+## Generic type changes
+
+The following classes are marked as a generic type.
+* All chart series renderers 
+* All chart segments 
+* ChartSeriesController
+* CircularSeriesController
+* FunnelSeriesController
+* PyramidSeriesController
+* LegendItemBuilder
+* ChartWidgetBuilder
+* ChartDataLabelTemplateBuilder
+
+### Known issues
+
+* The bar type series legend toggling animation is not working.
+* Newly added data point animation is not working.
+* The axis size changes immediately when the axis range transitions from single digits to multiple digits, such as 2 (10) or 3 (100) digits.
+
+## [23.1.39] - 10/04/2023
 
 **Bugs** 
+
+* #FB46807 - The tooltip showByIndex public method has been enhanced to work based on a given seriesIndex, even when multiple series are overlapped.
+* #FB46888 - The trackball hide method will work properly for the trackball tooltip builder.
+* #FB46698 - Fixed the issue where the trackball tooltip markers overlapped the text when the tooltip text had different sizes.
+
+
+## [22.2.9] - 08/15/2023
+
+**Bugs**
 
 * #FB45898 - Resolved the axis range rendering issue while updating the multiple segments using the addedDataIndexes property dynamically.
   

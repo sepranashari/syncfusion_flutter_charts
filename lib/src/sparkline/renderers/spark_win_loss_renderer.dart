@@ -31,7 +31,7 @@ class SfSparkWinLossChartRenderObjectWidget
       Color? lastPointColor,
       Color? negativePointColor,
       SparkChartDataDetails? sparkChartDataDetails,
-      SfChartThemeData? themeData,
+      SfSparkChartThemeData? themeData,
       List<Offset>? coordinatePoints,
       List<SparkChartPoint>? dataPoints})
       : super(
@@ -148,7 +148,7 @@ class _RenderSparkWinLossChart extends RenderSparkChart {
       Color? tiePointColor,
       double? borderWidth,
       Color? borderColor,
-      SfChartThemeData? themeData,
+      SfSparkChartThemeData? themeData,
       SparkChartDataDetails? sparkChartDataDetails,
       List<Offset>? coordinatePoints,
       List<SparkChartPoint>? dataPoints})
@@ -224,6 +224,15 @@ class _RenderSparkWinLossChart extends RenderSparkChart {
 
   @override
   void calculateRenderingPoints() {
+    if (minX == null ||
+        maxX == null ||
+        minY == null ||
+        maxY == null ||
+        dataPoints == null ||
+        areaSize == null) {
+      return;
+    }
+
     diffX = maxX! - minX!;
     diffY = maxY! - minY!;
     diffX = diffX == 0 ? 1 : diffX;

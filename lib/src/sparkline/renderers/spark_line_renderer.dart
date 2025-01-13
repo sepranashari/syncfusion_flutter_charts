@@ -33,7 +33,7 @@ class SfSparkLineChartRenderObjectWidget
       this.marker,
       this.labelDisplayMode,
       this.labelStyle,
-      SfChartThemeData? themeData,
+      SfSparkChartThemeData? themeData,
       SparkChartDataDetails? sparkChartDataDetails,
       List<Offset>? coordinatePoints,
       List<SparkChartPoint>? dataPoints})
@@ -99,7 +99,7 @@ class SfSparkLineChartRenderObjectWidget
         marker: marker,
         labelDisplayMode: labelDisplayMode,
         labelStyle: labelStyle,
-        themeData: themeData!,
+        themeData: themeData,
         sparkChartDataDetails: sparkChartDataDetails,
         coordinatePoints: coordinatePoints,
         dataPoints: dataPoints);
@@ -164,7 +164,7 @@ class _RenderSparkLineChart extends RenderSparkChart {
       SparkChartLabelDisplayMode? labelDisplayMode,
       TextStyle? labelStyle,
       SparkChartDataDetails? sparkChartDataDetails,
-      SfChartThemeData? themeData,
+      SfSparkChartThemeData? themeData,
       List<Offset>? coordinatePoints,
       List<SparkChartPoint>? dataPoints})
       : _width = width,
@@ -273,7 +273,6 @@ class _RenderSparkLineChart extends RenderSparkChart {
   /// Render line series.
   void _renderLineSeries(Canvas canvas, Offset offset) {
     if (width != null && width! > 0) {
-      _labelStyle = themeData!.dataLabelTextStyle;
       final Paint paint = Paint()
         ..strokeWidth = width!
         ..style = PaintingStyle.stroke
