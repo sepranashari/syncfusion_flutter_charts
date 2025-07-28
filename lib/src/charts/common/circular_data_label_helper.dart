@@ -239,11 +239,10 @@ void renderOutsideDataLabel(
   final EdgeInsets margin = settings.margin;
   final ConnectorLineSettings connector = settings.connectorLineSettings;
   connectorPath = Path();
-  final num connectorLength =
-      percentToValue(
-        connector.length ?? defaultConnectorLineLength,
-        point.outerRadius!,
-      )!;
+  final num connectorLength = percentToValue(
+    connector.length ?? defaultConnectorLineLength,
+    point.outerRadius!,
+  )!;
   final Offset startPoint = calculateOffset(
     point.midAngle!,
     point.outerRadius!.toDouble(),
@@ -348,53 +347,51 @@ Rect? getDataLabelRect(
       connectorType == ConnectorType.line
           ? connectorPath.lineTo(endPoint.dx + lineLength, endPoint.dy)
           : connectorPath.quadraticBezierTo(
-            endPoint.dx,
-            endPoint.dy,
-            endPoint.dx + lineLength,
-            endPoint.dy,
-          );
-      rect =
-          dataLabelSettings != null && dataLabelSettings.builder != null
-              ? Rect.fromLTWH(
-                endPoint.dx,
-                endPoint.dy,
-                textSize.width,
-                textSize.height,
-              )
-              : Rect.fromLTWH(
-                endPoint.dx + lineLength,
-                endPoint.dy - (textSize.height / 2) - margin.top,
-                textSize.width + margin.left + margin.right,
-                textSize.height + margin.top + margin.bottom,
-              );
+              endPoint.dx,
+              endPoint.dy,
+              endPoint.dx + lineLength,
+              endPoint.dy,
+            );
+      rect = dataLabelSettings != null && dataLabelSettings.builder != null
+          ? Rect.fromLTWH(
+              endPoint.dx,
+              endPoint.dy,
+              textSize.width,
+              textSize.height,
+            )
+          : Rect.fromLTWH(
+              endPoint.dx + lineLength,
+              endPoint.dy - (textSize.height / 2) - margin.top,
+              textSize.width + margin.left + margin.right,
+              textSize.height + margin.top + margin.bottom,
+            );
       break;
     case Position.left:
       connectorType == ConnectorType.line
           ? connectorPath.lineTo(endPoint.dx - lineLength, endPoint.dy)
           : connectorPath.quadraticBezierTo(
-            endPoint.dx,
-            endPoint.dy,
-            endPoint.dx - lineLength,
-            endPoint.dy,
-          );
-      rect =
-          dataLabelSettings != null && dataLabelSettings.builder != null
-              ? Rect.fromLTWH(
-                endPoint.dx,
-                endPoint.dy,
-                textSize.width,
-                textSize.height,
-              )
-              : Rect.fromLTWH(
-                endPoint.dx -
-                    lineLength -
-                    margin.right -
-                    textSize.width -
-                    margin.left,
-                endPoint.dy - ((textSize.height / 2) + margin.top),
-                textSize.width + margin.left + margin.right,
-                textSize.height + margin.top + margin.bottom,
-              );
+              endPoint.dx,
+              endPoint.dy,
+              endPoint.dx - lineLength,
+              endPoint.dy,
+            );
+      rect = dataLabelSettings != null && dataLabelSettings.builder != null
+          ? Rect.fromLTWH(
+              endPoint.dx,
+              endPoint.dy,
+              textSize.width,
+              textSize.height,
+            )
+          : Rect.fromLTWH(
+              endPoint.dx -
+                  lineLength -
+                  margin.right -
+                  textSize.width -
+                  margin.left,
+              endPoint.dy - ((textSize.height / 2) + margin.top),
+              textSize.width + margin.left + margin.right,
+              textSize.height + margin.top + margin.bottom,
+            );
       break;
   }
   return rect;
@@ -447,8 +444,8 @@ void shiftCircularDataLabels(
     }
 
     for (int pointIndex = 0; pointIndex < labels.length; pointIndex++) {
-      final CircularChartDataLabelPositioned dataLabelPositioned = labels
-          .elementAt(pointIndex);
+      final CircularChartDataLabelPositioned dataLabelPositioned =
+          labels.elementAt(pointIndex);
       final CircularChartPoint point = dataLabelPositioned.point!;
       if (point.isVisible) {
         final EdgeInsets margin = seriesRenderer.dataLabelSettings.margin;
@@ -466,12 +463,11 @@ void shiftCircularDataLabels(
         const String defaultConnectorLineLength = '10%';
         point.trimmedText = point.text;
         Path shiftedConnectorPath = Path();
-        final num connectorLength =
-            percentToValue(
-              seriesRenderer.dataLabelSettings.connectorLineSettings.length ??
-                  defaultConnectorLineLength,
-              point.outerRadius!,
-            )!;
+        final num connectorLength = percentToValue(
+          seriesRenderer.dataLabelSettings.connectorLineSettings.length ??
+              defaultConnectorLineLength,
+          point.outerRadius!,
+        )!;
         final Offset startPoint = calculateOffset(
           (point.startAngle! + point.endAngle!) / 2,
           point.outerRadius!.toDouble(),
@@ -554,15 +550,14 @@ void shiftCircularDataLabels(
           details.text = point.trimmedText!;
           point.dataLabelSize = measureText(details.text, details.textStyle);
           dataLabelPositioned.size = point.dataLabelSize;
-          rect =
-              getDataLabelRect(
-                point.dataLabelPosition,
-                seriesRenderer.dataLabelSettings.connectorLineSettings.type,
-                margin,
-                shiftedConnectorPath,
-                endPoint,
-                point.dataLabelSize,
-              )!;
+          rect = getDataLabelRect(
+            point.dataLabelPosition,
+            seriesRenderer.dataLabelSettings.connectorLineSettings.type,
+            margin,
+            shiftedConnectorPath,
+            endPoint,
+            point.dataLabelSize,
+          )!;
         } else {
           point.trimmedText = null;
         }
@@ -825,22 +820,19 @@ void _changeLabelAngle(
   const String defaultConnectorLineLength = '10%';
   final DataLabelSettings dataLabelSettings = seriesRenderer.dataLabelSettings;
   final RenderChartPlotArea parent = seriesRenderer.parent!;
-  final TextStyle dataLabelStyle =
-      parent.themeData!.textTheme.bodySmall!
-        ..merge(parent.chartThemeData!.dataLabelTextStyle)
-        ..merge(dataLabelSettings.textStyle);
+  final TextStyle dataLabelStyle = parent.themeData!.textTheme.bodySmall!
+    ..merge(parent.chartThemeData!.dataLabelTextStyle)
+    ..merge(dataLabelSettings.textStyle);
   // Builder check for change the angle based on the template size.
-  final Size textSize =
-      dataLabelSettings.builder != null
-          ? currentPoint.dataLabelSize
-          : measureText(currentPoint.text!, dataLabelStyle);
+  final Size textSize = dataLabelSettings.builder != null
+      ? currentPoint.dataLabelSize
+      : measureText(currentPoint.text!, dataLabelStyle);
   final Path angleChangedConnectorPath = Path();
-  final num connectorLength =
-      percentToValue(
-        dataLabelSettings.connectorLineSettings.length ??
-            defaultConnectorLineLength,
-        currentPoint.outerRadius!,
-      )!;
+  final num connectorLength = percentToValue(
+    dataLabelSettings.connectorLineSettings.length ??
+        defaultConnectorLineLength,
+    currentPoint.outerRadius!,
+  )!;
   final Offset startPoint = calculateOffset(
     newAngle.toDouble(),
     currentPoint.outerRadius!.toDouble(),
@@ -857,15 +849,14 @@ void _changeLabelAngle(
   }
 
   // TODO(Lavanya): Recheck label rect position here.
-  currentPoint.labelRect =
-      getDataLabelRect(
-        currentPoint.dataLabelPosition,
-        seriesRenderer.dataLabelSettings.connectorLineSettings.type,
-        dataLabelSettings.margin,
-        angleChangedConnectorPath,
-        endPoint,
-        textSize,
-      )!;
+  currentPoint.labelRect = getDataLabelRect(
+    currentPoint.dataLabelPosition,
+    seriesRenderer.dataLabelSettings.connectorLineSettings.type,
+    dataLabelSettings.margin,
+    angleChangedConnectorPath,
+    endPoint,
+    textSize,
+  )!;
 
   // TODO(Lavanya): Recheck connector line here.
   currentPoint.connectorPath = angleChangedConnectorPath;
@@ -944,6 +935,14 @@ Offset getPerpendicularDistance(Offset startPoint, CircularChartPoint point) {
   return increasedLocation;
 }
 
+String runeSubstring({
+  required String input,
+  required int start,
+  required int end,
+}) {
+  return String.fromCharCodes(input.runes.toList().sublist(start, end));
+}
+
 /// To trim the text by given width.
 String getTrimmedText(
   String text,
@@ -955,10 +954,14 @@ String getTrimmedText(
 
   num size = measureText(label, labelStyle).width;
   if (size > labelsExtent) {
-    final int textLength = text.length;
+    final int textLength = text.runes.length;
     if (isRtl ?? false) {
       for (int i = 0; i < textLength - 1; i++) {
-        label = '...${text.substring(i + 1, textLength)}';
+        label = '...${runeSubstring(
+          input: text,
+          start: i + 1,
+          end: textLength,
+        )}';
         size = measureText(label, labelStyle).width;
         if (size <= labelsExtent) {
           return label == '...' ? '' : label;
@@ -966,7 +969,11 @@ String getTrimmedText(
       }
     } else {
       for (int i = textLength - 1; i >= 0; --i) {
-        label = '${text.substring(0, i)}...';
+        label = '${runeSubstring(
+          input: text,
+          start: 0,
+          end: i,
+        )}...';
         size = measureText(label, labelStyle).width;
         if (size <= labelsExtent) {
           return label == '...' ? '' : label;
@@ -1090,12 +1097,11 @@ void shiftCircularDataLabelTemplate(
       );
       const String defaultConnectorLineLength = '10%';
       final Path shiftedConnectorPath = Path();
-      final num connectorLength =
-          percentToValue(
-            seriesRenderer.dataLabelSettings.connectorLineSettings.length ??
-                defaultConnectorLineLength,
-            point.outerRadius!,
-          )!;
+      final num connectorLength = percentToValue(
+        seriesRenderer.dataLabelSettings.connectorLineSettings.length ??
+            defaultConnectorLineLength,
+        point.outerRadius!,
+      )!;
       final Offset startPoint = calculateOffset(
         (point.startAngle! + point.endAngle!) / 2,
         point.outerRadius!.toDouble(),
@@ -1164,11 +1170,10 @@ void _renderOutsideDataLabelTemplate(
   final ConnectorLineSettings connector =
       seriesRenderer.dataLabelSettings.connectorLineSettings;
   connectorPath = Path();
-  final num connectorLength =
-      percentToValue(
-        connector.length ?? defaultConnectorLineLength,
-        point.outerRadius!,
-      )!;
+  final num connectorLength = percentToValue(
+    connector.length ?? defaultConnectorLineLength,
+    point.outerRadius!,
+  )!;
   final Offset startPoint = calculateOffset(
     point.midAngle!,
     point.outerRadius!.toDouble(),
@@ -1184,15 +1189,14 @@ void _renderOutsideDataLabelTemplate(
     connectorPath.lineTo(endPoint.dx, endPoint.dy);
   }
   point.dataLabelSize = templateSize;
-  final Rect rect =
-      getDataLabelRect(
-        point.dataLabelPosition,
-        connector.type,
-        margin,
-        connectorPath,
-        endPoint,
-        templateSize,
-      )!;
+  final Rect rect = getDataLabelRect(
+    point.dataLabelPosition,
+    connector.type,
+    margin,
+    connectorPath,
+    endPoint,
+    templateSize,
+  )!;
   point.connectorPath = connectorPath;
   point.labelRect = rect;
   point.renderPosition = ChartDataLabelPosition.outside;
