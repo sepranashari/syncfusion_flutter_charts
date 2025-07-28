@@ -88,7 +88,6 @@ Explore the full capabilities of our Flutter widgets on your device by installin
   <a href="https://www.microsoft.com/en-us/p/syncfusion-flutter-gallery/9nhnbwcsf85d?activetab=pivot:overviewtab"><img src="https://cdn.syncfusion.com/content/images/FTControl/windows-store.png"/></a> 
 </p>
 <p align="center">
-  <a href="https://install.appcenter.ms/orgs/syncfusion-demos/apps/syncfusion-flutter-gallery/distribution_groups/release"><img src="https://cdn.syncfusion.com/content/images/FTControl/macos-app-center.png"/></a>
   <a href="https://snapcraft.io/syncfusion-flutter-gallery"><img src="https://cdn.syncfusion.com/content/images/FTControl/snap-store.png"/></a>
   <a href="https://github.com/syncfusion/flutter-examples"><img src="https://cdn.syncfusion.com/content/images/FTControl/github-samples.png"/></a>
 </p>
@@ -317,7 +316,7 @@ Widget build(BuildContext context) {
 
 ## Support and Feedback
 
-* For any other queries, reach our [Syncfusion<sup>&reg;</sup> support team](https://support.syncfusion.com/support/tickets/create?utm_source=pubdev&utm_medium=listing&utm_campaign=flutter-charts-pubdev) or post the queries through the [Community forums](https://www.syncfusion.com/forums?utm_source=pubdev&utm_medium=listing&utm_campaign=flutter-charts-pubdev) and submit a feature request or a bug through our [Feedback portal](https://www.syncfusion.com/feedback/flutter?utm_source=pubdev&utm_medium=listing&utm_campaign=flutter-charts-pubdev).
+* For any other queries, reach our [Syncfusion <sup>&reg;</sup>support team](https://support.syncfusion.com/support/tickets/create?utm_source=pubdev&utm_medium=listing&utm_campaign=flutter-charts-pubdev) or post the queries through the [Community forums](https://www.syncfusion.com/forums?utm_source=pubdev&utm_medium=listing&utm_campaign=flutter-charts-pubdev) and submit a feature request or a bug through our [Feedback portal](https://www.syncfusion.com/feedback/flutter?utm_source=pubdev&utm_medium=listing&utm_campaign=flutter-charts-pubdev).
 * To renew the subscription, click [renew](https://www.syncfusion.com/sales/products?utm_source=pubdev&utm_medium=listing&utm_campaign=flutter-charts-pubdev) or contact our sales team at salessupport@syncfusion.com | Toll Free: 1-888-9 DOTNET.
 
 ## About Syncfusion<sup>&reg;</sup> Flutter Widgets

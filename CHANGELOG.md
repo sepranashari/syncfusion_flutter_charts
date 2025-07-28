@@ -1,4 +1,16 @@
-## [30.1.1] - 10/06/2025
+## [30.1.41] - 22/07/2025 
+
+**Bugs**
+
+* \#BD746428 - Resolved an exception caused by layout-phase mutations in chart elements to ensure compatibility with Flutter SDK 3.32.6.
+
+## [30.1.38] - 02/07/2025
+
+**Bugs**
+
+* \#GH2377 - Now, the [onPointTap](https://pub.dev/documentation/syncfusion_flutter_charts/latest/charts/ChartSeries/onPointTap.html) callbacks returns the point index properly for visible data points.
+
+## [30.1.37] - 25/06/2025
 
 **General**
 
